@@ -1,8 +1,6 @@
-console.log("suckling on a duckling");
-
-// import React from "react";
-// import ReactDOM from "react-dom";
-// import Root from "./Root";
+import React from "react";
+import ReactDOM from "react-dom";
+import Root from "./Root";
 
 /*
 import { createStore } from "./utils/redux";
@@ -22,7 +20,6 @@ const store = createStore(
 );
 */
 
-/*
 function render(Component, rootElement) {
   ReactDOM.render(<Component />, rootElement);
 }
@@ -36,4 +33,3 @@ if (module.hot) {
     render(HotReloadedRoot, rootElement);
   });
 }
-*/
