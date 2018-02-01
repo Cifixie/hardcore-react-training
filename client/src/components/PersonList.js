@@ -9,12 +9,9 @@ const PersonList = props => {
     return (
         <div>
             <p>{a.toFixed(2)}</p>
-            {persons.map(p => <Person {...rest} key={p.id} person={p}/>)}
+            {persons.map((p, index) => <Person {...rest} key={index} person={p}/>)}
         </div>
     )
 }
 
-PersonList.propTypes = {
-    persons: PropTypes.array.isRequired
-}
 export default PersonList;

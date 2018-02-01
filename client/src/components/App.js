@@ -1,10 +1,11 @@
 import React from "react"
+import { List } from "immutable"
+
 import personService from "../services/person"
 import PersonsList from "./PersonList"
+import HireForm from "./HireForm"
 import styles from "./App.pcss"
 
-import { List } from "immutable"
-import person from "../services/person";
 
 class App extends React.Component {
     state = {
@@ -17,6 +18,12 @@ class App extends React.Component {
         })
     }
 
+    hirePerson = person => {
+        this.setState({
+            persons: this.state.persons.push(person)
+        })
+    }
+
     componentDidMount() {
         personService.getPersons()
             .then(persons => this.setState({persons: List(persons)}))
@@ -26,9 +33,10 @@ class App extends React.Component {
         return (
             <div>
                 <h1>moi</h1>
-                <h1>Good persons</h1>
+                <HireForm hirePerson={this.hirePerson}/>
+                <h2>Good persons</h2>
                 <PersonsList persons={persons.filter(p => p.age > 30)} firePerson={this.firePerson}/>
-                <h1>better persons</h1>
+                <h2>better persons</h2>
                 <PersonsList persons={persons.filter(p => p.age <= 30)} firePerson={this.firePerson}/>
             </div>
         )
