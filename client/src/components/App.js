@@ -1,17 +1,39 @@
 import React from "react"
 import personService from "../services/person"
-import Person from "./Person"
+import PersonsList from "./PersonList"
+import styles from "./App.pcss"
+
+import { List } from "immutable"
 import person from "../services/person";
 
-const persons = Array.from(Array(50), personService.createPerson);
+class App extends React.Component {
+    state = {
+        persons: List()
+    }
 
-const App = props => {
-    return (
-        <div>
-            <h1>moi</h1>
-            {persons.map(p => <Person key={person.id} person={p}/>)}
-        </div>
-    )
+    firePerson = id => {
+        this.setState({
+            persons: this.state.persons.filter(p => p.id !== id)
+        })
+    }
+
+    componentDidMount() {
+        personService.getPersons()
+            .then(persons => this.setState({persons: List(persons)}))
+    }
+    render() {
+        const { persons } = this.state
+        return (
+            <div>
+                <h1>moi</h1>
+                <h1>Good persons</h1>
+                <PersonsList persons={persons.filter(p => p.age > 30)} firePerson={this.firePerson}/>
+                <h1>better persons</h1>
+                <PersonsList persons={persons.filter(p => p.age <= 30)} firePerson={this.firePerson}/>
+            </div>
+        )
+    }
+
 }
 
 export default App;
